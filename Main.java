@@ -17,7 +17,12 @@ public class Main  extends Application implements EventHandler<ActionEvent> {
         primaryStage.setTitle("title of the window");
         button = new Button();
         button.setText("Click me");
-        button.setOnAction(this);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("hi");
+            }
+        });
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
 
@@ -28,8 +33,7 @@ public class Main  extends Application implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-       if(event.getSource() == button){
-           System.out.println("hello world");
-       }
+
     }
 }
+
