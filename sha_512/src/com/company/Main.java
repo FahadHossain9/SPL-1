@@ -11,12 +11,12 @@ public class Main {
         System.out.print("Enter your text: ");
         String str = in.next();
         char [] chars = str.toCharArray();
-        int [] x = new int[10];
+        int [] x = new int[100000];
         int i=0,y=0;
 
          int[] bitform = new int[8];
 
-
+        System.out.println("length of the input is "+str.length());
          while(i<str.length()){
             x[i] = (int)chars[i] ;
             int num = x[i];
@@ -39,15 +39,11 @@ public class Main {
             i++;
         }
         padding(array_storing_bit,y);
-        for(int l=0;l<y;l++) {
-            System.out.print(array_storing_bit[l]+" ");
-        }
+
         in.close();
     }
     public static void padding(int arr[],int array_Length){
         int i,last_initialization;
-
-        System.out.println(array_Length);
        int running_bit_position = 0,m;
        int number_of_block ;
        if( array_Length%1024==0){
@@ -55,7 +51,7 @@ public class Main {
        }else {
            number_of_block = array_Length/1024 + 1;
        }
-        System.out.println(number_of_block);
+        System.out.println("number of blocks are " + number_of_block);
        int[][] blockwise_bits = new int [number_of_block][1024];
        for( m=0;m<number_of_block-1;m++) {
            for ( i = 0; i < 1024 ; i++) {
@@ -76,11 +72,14 @@ public class Main {
          //padding to make it 1024
       for(;i<1024;i++){
           blockwise_bits[m][i]=0;
-      }
+      }for(int u=0;u<=m;u++){
       for(int q=0;q<1024;q++){
-          System.out.print(blockwise_bits[m][q]+" ");
+          System.out.print(blockwise_bits[u][q]+" ");
+
       }
-        System.out.println("block has been completed");
+            System.out.println("no "+ u+" has been completed with padding");
+      }
+
     }
 
 
