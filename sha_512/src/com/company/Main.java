@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
-//public void padding(int []);
+
   private static   int [] array_storing_bit = new int [10000];
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -38,15 +38,16 @@ public class Main {
             }
             i++;
         }
-        padding(array_storing_bit);
+        padding(array_storing_bit,y);
         for(int l=0;l<y;l++) {
             System.out.print(array_storing_bit[l]+" ");
         }
         in.close();
     }
-    public static void padding(int arr[]){
+    public static void padding(int arr[],int array_Length){
         int i,last_initialization;
-       int array_Length =  arr.length;
+
+        System.out.println(array_Length);
        int running_bit_position = 0,m;
        int number_of_block ;
        if( array_Length%1024==0){
@@ -54,22 +55,32 @@ public class Main {
        }else {
            number_of_block = array_Length/1024 + 1;
        }
+        System.out.println(number_of_block);
        int[][] blockwise_bits = new int [number_of_block][1024];
-       for( m=0;m<number_of_block;m++) {
-           for ( i = 0; i < 1024 && running_bit_position<array_Length; i++) {
+       for( m=0;m<number_of_block-1;m++) {
+           for ( i = 0; i < 1024 ; i++) {
                  blockwise_bits[m][i]=arr[running_bit_position];
                  running_bit_position++;
            }
-       }
 
-       last_initialization = array_Length-m*1024-i;
-       
-       for(;last_initialization<1024;last_initialization++){
-           blockwise_bits[m][last_initialization]=0;
        }
+        System.out.println(running_bit_position);
+        i=0;
+         while(running_bit_position<array_Length){
+             blockwise_bits[m][i] =arr[running_bit_position];
+             running_bit_position++;
+             i++;
+         }
+         blockwise_bits[m][i]=1;
+         i++;
+         //padding to make it 1024
+      for(;i<1024;i++){
+          blockwise_bits[m][i]=0;
+      }
       for(int q=0;q<1024;q++){
           System.out.print(blockwise_bits[m][q]+" ");
       }
+        System.out.println("block has been completed");
     }
 
 
