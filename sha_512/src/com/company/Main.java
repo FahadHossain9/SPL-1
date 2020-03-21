@@ -61,6 +61,9 @@ public class Main {
 
     public static int[][] pad(int actualBinaryFormStored[], int arrayLength){
         int iteratorForBlocksWithin0To1024,last_initialization;
+        int sizeIsStoredIn128Bits[128];
+        int Length = arrayLength;
+        int count=127;
        int runningBitPosition = 0,currentBlock;
        int number_of_block ;
        //finding the number of blockS keeping mind of 18 bit ie length
@@ -89,8 +92,22 @@ public class Main {
          blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=1;
          iteratorForBlocksWithin0To1024++;
          //padding to make it 1024
-      for(;iteratorForBlocksWithin0To1024<1024;iteratorForBlocksWithin0To1024++){
+      for(;iteratorForBlocksWithin0To1024<1024-128;iteratorForBlocksWithin0To1024++){
           blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=0;
+      }
+      while(Length>0){
+           sizeIsStoredIn128Bits[count]=Length%2;
+           Length=Length/2;
+           count--;
+      }
+      while(count>=0){
+          sizeIsStoredIn128Bits[count]=0;
+          count--;
+      }
+      while (count<128){
+          blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=sizeIsStoredIn128Bits[count];
+          iteratorForBlocksWithin0To1024++;
+          count++;
       }
         for(int u=0;u<=currentBlock;u++){
             for(int q=0;q<1024;q++){
