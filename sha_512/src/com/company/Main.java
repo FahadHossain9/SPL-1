@@ -63,7 +63,8 @@ public class Main {
         int iteratorForBlocksWithin0To1024,last_initialization;
        int runningBitPosition = 0,currentBlock;
        int number_of_block ;
-       if( arrayLength%1024==0){
+       //finding the number of blockS keeping mind of 18 bit ie length
+       if( arrayLength+128%1024==0){
           number_of_block = arrayLength/1024;
        }else {
            number_of_block = arrayLength/1024 + 1;
