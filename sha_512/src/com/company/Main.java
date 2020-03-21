@@ -22,7 +22,7 @@ public class Main {
         int[] bitform = new int[8];
 
 
-         while(iterator<str.length()){
+        while(iterator<str.length()){
             arrayStoringAsciiValues[iterator] = (int)chars[iterator] ;
             int asciiValueOfACharacter = arrayStoringAsciiValues[iterator];
             //storing the reverse binary form
@@ -42,14 +42,14 @@ public class Main {
             //reverse the reverse form to store actual binary form
             iteratorFromReverse=7;
             while(iteratorFromReverse>=0){
-               arrayStoringBit[iterator2]= bitform[iteratorFromReverse];
-               iterator2++;
-               iteratorFromReverse--;
+                arrayStoringBit[iterator2]= bitform[iteratorFromReverse];
+                iterator2++;
+                iteratorFromReverse--;
             }
             iterator++;
         }
 
-         //passing the bits to pad function to make th array multiple of 1024 bits
+        //passing the bits to pad function to make th array multiple of 1024 bits
         blockwiseBits = pad(arrayStoringBit,iterator2);
         wordGenerator(blockwiseBits);
 
@@ -61,54 +61,55 @@ public class Main {
 
     public static int[][] pad(int actualBinaryFormStored[], int arrayLength){
         int iteratorForBlocksWithin0To1024,last_initialization;
-        int sizeIsStoredIn128Bits[128];
+        int[] sizeIsStoredIn128Bits=new int[128];
         int Length = arrayLength;
         int count=127;
-       int runningBitPosition = 0,currentBlock;
-       int number_of_block ;
-       //finding the number of blockS keeping mind of 18 bit ie length
-       if( arrayLength+128%1024==0){
-          number_of_block = arrayLength/1024;
-       }else {
-           number_of_block = arrayLength/1024 + 1;
-       }
+        int runningBitPosition = 0,currentBlock;
+        int number_of_block ;
+        //finding the number of blockS keeping mind of 18 bit ie length
+        if( arrayLength+128%1024==0){
+            number_of_block = arrayLength/1024;
+        }else {
+            number_of_block = arrayLength/1024 + 1;
+        }
         System.out.println("number of blocks are " + number_of_block);
-         blockwiseBits = new int [number_of_block][1024];
-       //initialize the block from plain text which is already 1024 long & do not need padding
-       for( currentBlock=0;currentBlock<number_of_block-1;currentBlock++) {
-           for ( iteratorForBlocksWithin0To1024 = 0; iteratorForBlocksWithin0To1024 < 1024 ; iteratorForBlocksWithin0To1024++) {
-                 blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=actualBinaryFormStored[runningBitPosition];
-                 runningBitPosition++;
-           }
+        blockwiseBits = new int [number_of_block][1024];
+        //initialize the block from plain text which is already 1024 long & do not need padding
+        for( currentBlock=0;currentBlock<number_of_block-1;currentBlock++) {
+            for ( iteratorForBlocksWithin0To1024 = 0; iteratorForBlocksWithin0To1024 < 1024 ; iteratorForBlocksWithin0To1024++) {
+                blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=actualBinaryFormStored[runningBitPosition];
+                runningBitPosition++;
+            }
 
-       }
-       //last block which is short of 1024 bit & need padding
+        }
+        //last block which is short of 1024 bit & need padding
         iteratorForBlocksWithin0To1024=0;
-         while(runningBitPosition<arrayLength){
-             blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024] =actualBinaryFormStored[runningBitPosition];
-             runningBitPosition++;
-             iteratorForBlocksWithin0To1024++;
-         }
-         blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=1;
-         iteratorForBlocksWithin0To1024++;
-         //padding to make it 1024
-      for(;iteratorForBlocksWithin0To1024<1024-128;iteratorForBlocksWithin0To1024++){
-          blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=0;
-      }
-      while(Length>0){
-           sizeIsStoredIn128Bits[count]=Length%2;
-           Length=Length/2;
-           count--;
-      }
-      while(count>=0){
-          sizeIsStoredIn128Bits[count]=0;
-          count--;
-      }
-      while (count<128){
-          blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=sizeIsStoredIn128Bits[count];
-          iteratorForBlocksWithin0To1024++;
-          count++;
-      }
+        while(runningBitPosition<arrayLength){
+            blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024] =actualBinaryFormStored[runningBitPosition];
+            runningBitPosition++;
+            iteratorForBlocksWithin0To1024++;
+        }
+        blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=1;
+        iteratorForBlocksWithin0To1024++;
+        //padding to make it 1024
+        for(;iteratorForBlocksWithin0To1024<1024-128;iteratorForBlocksWithin0To1024++){
+            blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=0;
+        }
+        while(Length>0){
+            sizeIsStoredIn128Bits[count]=Length%2;
+            Length=Length/2;
+            count--;
+        }
+        while(count>=0){
+            sizeIsStoredIn128Bits[count]=0;
+            count--;
+        }
+        count=0;
+        while (count<128){
+            blockwiseBits[currentBlock][iteratorForBlocksWithin0To1024]=sizeIsStoredIn128Bits[count];
+            iteratorForBlocksWithin0To1024++;
+            count++;
+        }
         for(int u=0;u<=currentBlock;u++){
             for(int q=0;q<1024;q++){
                 System.out.print(blockwiseBits[u][q]+" ");
@@ -117,12 +118,12 @@ public class Main {
             System.out.println("no "+ u +" has been completed with padding");
         }
 
-      return blockwiseBits;
+        return blockwiseBits;
 
     }
- public static void  wordGenerator(int [][]blockwiseBits){
+    public static void  wordGenerator(int [][]blockwiseBits){
 
- }
+    }
 
 
 
