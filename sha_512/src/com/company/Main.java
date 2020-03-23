@@ -6,6 +6,9 @@ public class Main {
     private static int[][] blockwiseBits;
     private static   int [] arrayStoringBit = new int [10000];
     public static int [][] wordsFromBlocks;
+    public static int[] blocks = new int[1024];
+    public static    int number_of_block ;
+    public static int[][] words = new int[80][64];
     public static void main(String[] args) {
 
 
@@ -50,22 +53,24 @@ public class Main {
         }
 
         //passing the bits to pad function to make th array multiple of 1024 bits
-        blockwiseBits = pad(arrayStoringBit,iterator2);
-        wordGenerator(blockwiseBits);
+         pad(arrayStoringBit,iterator2);
+        for(int l=0;l<number_of_block;l++) {
+            wordGenerator(blockwiseBits[l]);
+        }
 
-        in.close();
+
     }
 
 
 
 
-    public static int[][] pad(int actualBinaryFormStored[], int arrayLength){
+    public static void pad(int actualBinaryFormStored[], int arrayLength){
         int iteratorForBlocksWithin0To1024,last_initialization;
         int[] sizeIsStoredIn128Bits=new int[128];
         int Length = arrayLength;
         int count=127;
         int runningBitPosition = 0,currentBlock;
-        int number_of_block ;
+
         //finding the number of blockS keeping mind of 18 bit ie length
         if( arrayLength+128%1024==0){
             number_of_block = arrayLength/1024;
@@ -118,12 +123,57 @@ public class Main {
             System.out.println("no "+ u +" has been completed with padding");
         }
 
-        return blockwiseBits;
+        return ;
 
     }
-    public static void  wordGenerator(int [][]blockwiseBits){
+    public static  void wordGenerator(int[] blocks){
+        int iteratorForBlocks=0;
+        int afterRightShiftby1Bit[64];
+        int afterRightShiftby8Bit[64];
+        int afterRightShiftby19Bit[64];
+        int afterRightShiftby61Bit[64];
+        int afterLefttShiftby7Bit[64];
+        int afterLefttShiftby6Bit[64];
+
+        for(int l=0;l<16;l++){
+            for(int h=0;h<64;h++) {
+                words[l][h]=blocks[iteratorForBlocks];
+                iteratorForBlocks++;
+            }
+        }
+
 
     }
+    public static int [] circularRightShiftRotatorBy1Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=0;q<64;q++){
+            newWord[q]=word[q+1%64];
+        }
+        return newWord;
+    }
+    public static int [] circularRightShiftRotatorBy8Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=0;q<64;q++){
+            newWord[q]=word[q+8%64];
+        }
+        return newWord;
+    }
+    public static int [] circularRightShiftRotatorBy19Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=0;q<64;q++){
+            newWord[q]=word[q+19%64];
+        }
+        return newWord;
+    }
+    public static int [] circularRightShiftRotatorBy61Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=0;q<64;q++){
+            newWord[q]=word[q+61%64];
+        }
+        return newWord;
+    }
+
+
 
 
 
