@@ -144,6 +144,27 @@ public class Main {
 
 
     }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
+    public static int [] LefttShiftRotatorBy7Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=7;q<64;q++){
+            newWord[q-7] = word[q];
+        }
+        for(int q=57;q<64;q++){
+            newWord[q] = 0;
+        }
+    }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
+    public static int [] LefttShiftRotatorBy6Bit(int []word){
+        int [] newWord = new int[64];
+        for(int q=6;q<64;q++){
+            newWord[q-6] = word[q];
+        }
+        for(int q=58;q<64;q++){
+            newWord[q] = 0;
+        }
+    }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] circularRightShiftRotatorBy1Bit(int []word){
         int [] newWord = new int[64];
         for(int q=0;q<64;q++){
@@ -158,6 +179,7 @@ public class Main {
         }
         return newWord;
     }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] circularRightShiftRotatorBy19Bit(int []word){
         int [] newWord = new int[64];
         for(int q=0;q<64;q++){
@@ -165,6 +187,7 @@ public class Main {
         }
         return newWord;
     }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] circularRightShiftRotatorBy61Bit(int []word){
         int [] newWord = new int[64];
         for(int q=0;q<64;q++){
