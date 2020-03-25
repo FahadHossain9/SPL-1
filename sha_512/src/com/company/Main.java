@@ -127,20 +127,21 @@ public class Main {
 
     }
     public static  void wordGenerator(int[] blocks){
-        int iteratorForBlocks=0;
-        int afterRightShiftby1Bit[64];
-        int afterRightShiftby8Bit[64];
-        int afterRightShiftby19Bit[64];
-        int afterRightShiftby61Bit[64];
-        int afterLefttShiftby7Bit[64];
-        int afterLefttShiftby6Bit[64];
-
+        int  iteratorForBlocks=0;
+        int [] afterRightShiftby1Bit = new int[64];
+        int [] afterRightShiftby8Bit = new int[64];
+        int [] afterRightShiftby19Bit = new  int[64];
+        int [] afterRightShiftby61Bit = new int[64];
+        int [] afterLefttShiftby7Bit= new int[64];
+        int [] afterLefttShiftby6Bit= new int[64];
+      //first 16 word generated from the plain text
         for(int l=0;l<16;l++){
             for(int h=0;h<64;h++) {
                 words[l][h]=blocks[iteratorForBlocks];
                 iteratorForBlocks++;
             }
         }
+
 
 
     }
@@ -153,6 +154,7 @@ public class Main {
         for(int q=57;q<64;q++){
             newWord[q] = 0;
         }
+        return newWord;
     }
     //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] LefttShiftRotatorBy6Bit(int []word){
@@ -163,6 +165,7 @@ public class Main {
         for(int q=58;q<64;q++){
             newWord[q] = 0;
         }
+        return newWord;
     }
     //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] circularRightShiftRotatorBy1Bit(int []word){
@@ -172,6 +175,7 @@ public class Main {
         }
         return newWord;
     }
+    //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] circularRightShiftRotatorBy8Bit(int []word){
         int [] newWord = new int[64];
         for(int q=0;q<64;q++){
@@ -192,6 +196,23 @@ public class Main {
         int [] newWord = new int[64];
         for(int q=0;q<64;q++){
             newWord[q]=word[q+61%64];
+        }
+        return newWord;
+    }
+    public static  int[] exclusiveOR(int []firstPart,int []secondPart){
+        int [] newWord = new int[64];
+        for(int u=0;u<64;u++){
+            if(firstPart[u]==1 && secondPart[u]==0){
+                newWord[u]=1;
+            }else if(firstPart[u]==0 && secondPart[u]==1){
+                newWord[u]=1;
+            }
+            else if(firstPart[u]==1 && secondPart[u]==1){
+                newWord[u]=0;
+            }
+            else if(firstPart[u]==0 && secondPart[u]==0){
+                newWord[u]=0;
+            }
         }
         return newWord;
     }
