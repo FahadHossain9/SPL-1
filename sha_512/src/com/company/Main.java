@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
+
 public class Main {
     private static int[][] blockwiseBits;
     private static   int [] arrayStoringBit = new int [10000];
@@ -215,6 +216,30 @@ public class Main {
             }
         }
         return newWord;
+    }
+    public static int binarytoIntegerConverter(int []binaryFormStorage){
+        int storageOfTheInteger;
+        int powerOfTwo=1;
+        storageOfTheInteger=0;
+        for(int y=0;y<64;y++){
+            storageOfTheInteger = storageOfTheInteger+binaryFormStorage[y]*powerOfTwo;
+            powerOfTwo*=2;
+        }
+        return storageOfTheInteger;
+
+
+    }
+    public static int additionModulorOf2toThePower64(int sum){
+
+        int sumAfterAdditionModule=0;
+        int powerOfTwo=1;
+
+        for(int y=0;y<64;y++){
+            powerOfTwo*=2;
+        }
+
+        sumAfterAdditionModule = sumAfterAdditionModule % powerOfTwo;
+        return sumAfterAdditionModule;
     }
 
 
