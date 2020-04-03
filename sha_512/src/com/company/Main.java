@@ -229,6 +229,18 @@ public class Main {
 
 
     }
+    //sigma0to512function
+    public static int [] sigma0to512(int []storageOf64bit){
+
+       return exclusiveOR(exclusiveOR(circularRightShiftRotatorBy1Bit(storageOf64bit),circularRightShiftRotatorBy8Bit(storageOf64bit)),LefttShiftRotatorBy7Bit(storageOf64bit))
+
+    }
+    //sigma1to512function
+    public static int [] sigma1to512(int []storageOf64bit) {
+
+       return    exclusiveOR(exclusiveOR(circularRightShiftRotatorBy19Bit(storageOf64bit),circularRightShiftRotatorBy61Bit(storageOf64bit)),LefttShiftRotatorBy6Bit(storageOf64bit))
+
+    }
     public static int additionModulorOf2toThePower64(int sum){
 
         int sumAfterAdditionModule=0;
