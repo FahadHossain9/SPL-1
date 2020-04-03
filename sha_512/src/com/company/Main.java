@@ -142,10 +142,17 @@ public class Main {
                 iteratorForBlocks++;
             }
         }
+        //using function and opetaion we create the remaining 64 words
+        int sum;
+       for(int l=16;l<80;l++){
+           sum =  additionModulorOf2toThePower64(binarytoIntegerConverter(sigma1to512(words[l-2])) + binarytoIntegerConverter(words[l-7]) +binarytoIntegerConverter(words[l-15]) + binarytoIntegerConverter(words[l-16]));
+           words[l] = IntegerToBinaryConverter(sum);
+       }
 
 
 
     }
+
     //intermdeiate rotatori function for sigma0to512 and sigma1to512
     public static int [] LefttShiftRotatorBy7Bit(int []word){
         int [] newWord = new int[64];
@@ -200,6 +207,7 @@ public class Main {
         }
         return newWord;
     }
+    //perform xor operation
     public static  int[] exclusiveOR(int []firstPart,int []secondPart){
         int [] newWord = new int[64];
         for(int u=0;u<64;u++){
@@ -217,6 +225,7 @@ public class Main {
         }
         return newWord;
     }
+    //make the 64 bit to a single integer
     public static int binarytoIntegerConverter(int []binaryFormStorage){
         int storageOfTheInteger;
         int powerOfTwo=1;
@@ -228,6 +237,16 @@ public class Main {
         return storageOfTheInteger;
 
 
+    }
+    //make the integer to 64 bit binary
+    public static int [] IntegerToBinaryConverter(int anIntegerStorage){
+        int [] binaryForm = new int [64];
+        int iterator = 0;
+        while (anIntegerStorage>0){
+            binaryForm[iterator] = anIntegerStorage%2;
+            anIntegerStorage =anIntegerStorage/2;
+        }
+        return binaryForm;
     }
     //sigma0to512function
     public static int [] sigma0to512(int []storageOf64bit){
@@ -241,6 +260,7 @@ public class Main {
        return    exclusiveOR(exclusiveOR(circularRightShiftRotatorBy19Bit(storageOf64bit),circularRightShiftRotatorBy61Bit(storageOf64bit)),LefttShiftRotatorBy6Bit(storageOf64bit))
 
     }
+    //additionmodular to stable the size
     public static int additionModulorOf2toThePower64(int sum){
 
         int sumAfterAdditionModule=0;
@@ -253,6 +273,7 @@ public class Main {
         sumAfterAdditionModule = sumAfterAdditionModule % powerOfTwo;
         return sumAfterAdditionModule;
     }
+
 
 
 
