@@ -5,9 +5,8 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException{
-	//If the input is not in correct format
-       // if(args.length<1)
+    public static void main(String[] args) {
+
        Scanner sc = new Scanner(System.in);
        String  input = sc.nextLine();
        String hashMessage = sha512(input.getBytes());
